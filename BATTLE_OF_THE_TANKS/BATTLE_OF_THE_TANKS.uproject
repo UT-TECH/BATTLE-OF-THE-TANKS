@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.21",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "BATTLE_OF_THE_TANKS",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
