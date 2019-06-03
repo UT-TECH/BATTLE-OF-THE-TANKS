@@ -7,7 +7,10 @@
 		{
 			"Name": "BATTLE_OF_THE_TANKS",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	]
 }
