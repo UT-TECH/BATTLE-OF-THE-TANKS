@@ -15,10 +15,11 @@ class BATTLE_OF_THE_TANKS_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
-public:
+private:
 	ATank* GetControlledTank() const;
 	ATank* GetPlayerTank() const;
 
+	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 	
 };

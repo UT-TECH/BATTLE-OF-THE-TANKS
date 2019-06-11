@@ -10,6 +10,8 @@ ATank::ATank()
 
 }
 
+
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
@@ -31,3 +33,9 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+
+void ATank::AimAT(FVector Hitlocation)
+{
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s  is Aiming at :	%s"), *TankName,*(Hitlocation.ToString()));
+}
