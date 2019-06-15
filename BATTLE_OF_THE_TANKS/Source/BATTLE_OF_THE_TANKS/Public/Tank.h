@@ -7,7 +7,7 @@
 #include "Tank.generated.h"
 
 class UTankBarrel;
-
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLE_OF_THE_TANKS_API ATank : public APawn
@@ -20,7 +20,13 @@ public:
 	void AimAT(FVector Hitlocation);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel*BarrelToSet);
+		void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTurretReference(UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+		void fire();
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,7 +35,7 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 100000;
+		float LaunchSpeed = 4000;
 
 public:	
 	// Called every frame
