@@ -5,6 +5,8 @@
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
 
 // Sets default values
 ATank::ATank()
@@ -57,4 +59,13 @@ void ATank::fire()
 {
 	auto Time = GetWorld()->GetTimeSeconds();
 	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fires"), Time);
+
+	if (!Barrel) { return; }
+
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBlueprint,
+		Barrel->GetSocketLocation(FName("ProjectileStartingPoint")),
+		Barrel->GetSocketRotation(FName("ProjectileStartingPoint"))
+		);
+
 }
