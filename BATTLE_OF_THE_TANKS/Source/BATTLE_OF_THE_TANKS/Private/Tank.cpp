@@ -48,6 +48,7 @@ void ATank::AimAT(FVector Hitlocation)
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
@@ -57,15 +58,17 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 
 void ATank::fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Tank Fires"), Time);
+	
 
 	if (!Barrel) { return; }
 
-	GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBlueprint,
-		Barrel->GetSocketLocation(FName("ProjectileStartingPoint")),
-		Barrel->GetSocketRotation(FName("ProjectileStartingPoint"))
-		);
+	FVector SocketLocation = Barrel->GetSocketLocation(FName("ProjectileStartingPoint"));
+	FRotator SocketRotation = Barrel->GetSocketRotation(FName("ProjectileStartingPoint"));
+	UWorld *world = GetWorld();
 
+
+	auto Projectile = world->SpawnActor<AProjectile>(ProjectileBlueprint,SocketLocation,SocketRotation);
+	UE_LOG(LogTemp, Warning, TEXT("%Projectile fires "));
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
