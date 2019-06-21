@@ -2,25 +2,21 @@
 
 #pragma once
 #include "CoreMinimal.h"
-#include "Tank.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLE_OF_THE_TANKS_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
-public:
-	ATank* GetControlledTank() const;
-
+	
+private:
 	virtual void Tick(float DeltaTime) override;
-
 
 	virtual void BeginPlay() override;
 
-private:
 	void AimTowardsCrosshair();
 
 	bool GetSightRayHitLocation(FVector& HitLocation) const;
@@ -38,5 +34,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		float LineTraceRange = 1000000;
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+		void FoundAimingComponent(UTankAimingComponent* AimComprRef);
+
 
 };

@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
+#include "TankAimingComponent.h"
 
 void ATankPlayerController::Tick(float DeltaTime)
 {
@@ -15,34 +16,25 @@ void ATankPlayerController::Tick(float DeltaTime)
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayController IS NOT POSSESSING A TANK!"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController IS POSSESSING A TANK! : %s"), *(ControlledTank->GetName()));
-	}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
+	FoundAimingComponent(AimingComponent);
 }
 
 
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
 
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank()){return;}
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-	FVector Hitlocation;
-	if (GetSightRayHitLocation(Hitlocation))
+	if (!ensure(AimingComponent)) { return; }
+	FVector HitLocation;
+	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAT(Hitlocation);
+		AimingComponent->AimAt(HitLocation);
 	}
 
 }
@@ -55,7 +47,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation,LookDirection))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("LooKDirection:	%s"), *(LookDirection.ToString()));
 		GetLookVectorHitLocation(LookDirection, HitLocation);
 
 	}
