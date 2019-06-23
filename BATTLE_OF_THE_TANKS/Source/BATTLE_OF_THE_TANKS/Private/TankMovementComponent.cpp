@@ -51,6 +51,7 @@ void UTankMovementComponent::IntendTurnLeft(float Throw)
 	RightTrack->SetTrottle(-Throw);
 }
 
+
 void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, bool bForceMaxSpeed)
 {
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();

@@ -46,7 +46,7 @@ protected:
 	//virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::Locked;
+	EFiringState FiringState = EFiringState::Reloading;
 
 
 
@@ -61,7 +61,7 @@ private:
 
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 4000;
+		float LaunchSpeed = 12000;
 	
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
@@ -72,4 +72,12 @@ private:
 
 
 	double LastFireTime = 0;
+
+	virtual void BeginPlay() override;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	bool IsBarrelMoving();
+
+	FVector AimDirection;
 };
