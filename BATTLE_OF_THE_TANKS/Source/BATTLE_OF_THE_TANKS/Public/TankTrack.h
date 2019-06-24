@@ -18,7 +18,7 @@ public:
 		void SetTrottle(float Throttle);
 	
 		UPROPERTY(EditDefaultsOnly)	
-			float TrackMaxDrivingForce= 45000000;
+			float TrackMaxDrivingForce= 50000000;
 private:
 	UTankTrack();
 
