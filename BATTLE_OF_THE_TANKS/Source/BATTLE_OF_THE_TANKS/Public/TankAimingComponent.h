@@ -28,8 +28,6 @@ class BATTLE_OF_THE_TANKS_API UTankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
-
 
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
@@ -49,8 +47,6 @@ public:
 	int32 GetRoundsLeft() const;
 
 protected:
-	// Called when the game starts
-	//virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
