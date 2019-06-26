@@ -78,6 +78,7 @@ bool UTankAimingComponent::IsBarrelMoving()
 }
 
 
+
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) { return; }
