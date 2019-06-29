@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
+#include "Engine/Public/TimerManager.h"
 #include "Classes/Components/StaticMeshComponent.h"
 #include "Classes/Particles/ParticleSystemComponent.h"
 
@@ -54,9 +55,20 @@ void AProjectile::LaunchProjectile(float Speed)
 	ProjectileMovement->Activate();
 }
 
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
+}
+
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
+
+	SetRootComponent(ImpactBlast);
+	CollisionMesh->DestroyComponent();
+
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
 }
