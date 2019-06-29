@@ -6,8 +6,10 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Classes/Components/StaticMeshComponent.h"
 #include "Classes/Particles/ParticleSystemComponent.h"
+#include"Classes/PhysicsEngine/RadialForceComponent.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
+
 
 UCLASS()
 class BATTLE_OF_THE_TANKS_API AProjectile : public AActor
@@ -37,6 +39,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		URadialForceComponent* ExplosionForce = nullptr;
 
 	UFUNCTION()
 		void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
