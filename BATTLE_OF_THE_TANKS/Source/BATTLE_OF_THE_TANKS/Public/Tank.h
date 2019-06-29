@@ -10,7 +10,6 @@ class BATTLE_OF_THE_TANKS_API ATank : public APawn
 {
 	GENERATED_BODY()
 public:
-	ATank();
 
 	virtual float TakeDamage
 	(
@@ -20,7 +19,14 @@ public:
 		AActor * DamageCauser
 	)override;
 
+	UFUNCTION(BlueprintPure, Category = "Health")
+		float GetHealthPercent() const;
+
 private:
+	ATank();
+
+	
+
 	UPROPERTY(VisibleAnywhere, Category = "Setup")
 	int32 StartingHealth = 100;
 
