@@ -12,10 +12,14 @@ class BATTLE_OF_THE_TANKS_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+
+
 private:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void BeginPlay() override;
+
+	virtual void SetPawn(APawn* InPawn) override;
 
 	void AimTowardsCrosshair();
 
@@ -38,6 +42,9 @@ private:
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimComprRef);
+
+	UFUNCTION()
+		void OnPossedTankDeath();
 
 
 };
